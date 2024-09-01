@@ -24,6 +24,11 @@ font = pygame.font.SysFont(None, 55)
 placement = 0
 
 def afficher_plateau(plateau, joueurs, ath):
+    """
+        IN : La grille, les joueurs et le texte à afficher
+        OUT : None
+        Affiche la grille et le texte à l'écran
+    """
     window.fill(black)
     afficher_ath(ath)
     afficher_score(joueurs)
@@ -40,11 +45,21 @@ def afficher_plateau(plateau, joueurs, ath):
     pygame.display.update()
 
 def afficher_ath(ath):
+    """
+        IN : Le texte à afficher
+        OUT : None
+        Affiche le texte en haut de l'écran
+    """
     text = font.render(ath, True, white)
     text_rect = text.get_rect(center=(400, 50))
     window.blit(text, text_rect)
 
 def afficher_score(joueurs):
+    """
+        IN : Les joueurs
+        OUT : None
+        Affiche le score des joueurs
+    """
     for joueur in joueurs:
         if joueur.numero==1: 
             text = font.render("J1:"+str(joueur.score), True, white)
@@ -56,6 +71,11 @@ def afficher_score(joueurs):
             window.blit(text, text_rect)
 
 def sortie(x, y, plateau):
+    """
+        IN : Les coordonnées de sortie du faisceau
+        OUT : None
+        Dessine un carré rouge à la sortie du faisceau
+    """
     n = len(plateau)  # Nombre de cases dans la grille
     case_width = plateau_width // n
     case_height = plateau_height // n
@@ -64,15 +84,20 @@ def sortie(x, y, plateau):
     pygame.draw.rect(window, red, (case_x, case_y, case_width, case_height))
     pygame.display.update()
 
-def grille_to_window_coords(plateau):
-    n=len(plateau)
-    case_width = plateau_width // n
-    case_height = plateau_height // n
-    x = plateau_x + n * case_width + case_width // 2
-    y = plateau_y + n * case_height + case_height // 2
-    return x, y
+# Dimensions du bouton
+bouton_largeur = 150
+bouton_hauteur = 50
+bouton_x = WINDOW_WIDTH - bouton_largeur - 30
+bouton_y = 10 
 
-def clic(n):
+def afficher_bouton():
+    pygame.draw.rect(window, red, (bouton_x, bouton_y, bouton_largeur, bouton_hauteur))
+    texte = font.render("PASSER", True, white)
+    text_rect = texte.get_rect(center=(bouton_x + bouton_largeur // 2, bouton_y + bouton_hauteur // 2))
+    window.blit(texte, text_rect)
+    pygame.display.update()
+
+def clic(n, bouton):
     x, y = 0, 0
     for event in pygame.event.get():
         pygame.event.clear(eventtype= pygame.MOUSEBUTTONDOWN)
@@ -82,8 +107,11 @@ def clic(n):
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 mouse_x, mouse_y = event.pos
+                if bouton==True: #Si le bouton est sensé être affiché
+                    if bouton_x <=mouse_x<= bouton_x+bouton_largeur and bouton_y <=mouse_y<= bouton_y+bouton_hauteur:
+                        return True, True #a et b prennent la valeur True pour signifier que le bouton a été cliqué
                 case_width = plateau_width // n
                 case_height = plateau_height // n
                 x = (mouse_x - plateau_x) // case_width
-                y = (mouse_y - plateau_y) // case_height
+                y = (mouse_y - plateau_y) // case_height           
     return x, y

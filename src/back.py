@@ -53,7 +53,8 @@ class Grille:
             Effectue le placement d'une balle si l'emplacement choisi est valide
         """
         #Si les coordonnées sont valides:
-        if self._plateau[x][y]==0:
+        n=len(self._plateau)
+        if 0<=x<=n-1 and 0<=y<=n-1 and self._plateau[x][y]==0:
             #Placer la balle
             self._plateau[x][y]=Ball(joueur)
         #Sinon, tant que les coordonnées ne sont pas valides:
@@ -79,7 +80,7 @@ class Grille:
         x+=direction[0]
         y+=direction[1]
         #tant que le faisceau n'est pas sorti du plateau
-        while x+direction[0]!=0 and x+direction[0]!=n and y+direction[1]!=0 and y+direction[1]!=n:
+        while x+direction[0]!=-1 and x+direction[0]!=n and y+direction[1]!=-1 and y+direction[1]!=n:
             n_direction=self.changerDirection(x, y, direction)
             if n_direction=="H": #si la direction est "Hit"
                 return None,None,"H" #une balle a été touchée, pas de sortie de laser
@@ -156,6 +157,6 @@ def coordonnee_alea(n):
     """
         Prends en entrée la taille du plateau, renvoie des coordonnées aléatoires pour le bot
     """
-    x = random.randint(1, n - 1)
+    x = random.randint(0, n - 1)
     y = random.randint(0, n - 1)
     return x, y

@@ -29,9 +29,9 @@ def afficher_boutons(boutons):
         fenetre.blit(texte_bouton, rect_texte_bouton)
 
 def Menu():
-    n = 8  # Taille par défaut du plateau
-    p = 5  # Nombre de balles par défaut
-    contre_ordi = False  # Par défaut, jouer contre un autre joueur
+    n = 8  #Taille par défaut du plateau
+    p = 5  #Nombre de balles par défaut
+    contre_ordi = False  #Par défaut, jouer contre un autre joueur
 
     boutons_principal = [
         {"label": "Jouer", "rect": pygame.Rect(largeur_fenetre // 2 - 100, hauteur_fenetre // 2 - 60, 200, 50)},
