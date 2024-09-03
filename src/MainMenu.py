@@ -30,7 +30,7 @@ def afficher_boutons(boutons):
 
 def Menu():
     n = 8  #Taille par défaut du plateau
-    p = 5  #Nombre de balles par défaut
+    p = 4  #Nombre de balles par défaut
     contre_ordi = False  #Par défaut, jouer contre un autre joueur
 
     boutons_principal = [

@@ -4,11 +4,9 @@ pygame.init()
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
-green = [0, 250, 0]
-dark_green = [0, 100, 0]
-white = [250, 250, 250]
 black = [0, 0, 0]
-red=(255, 0, 0)
+red=[255, 0, 0]
+white = [250, 250, 250]
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Black Box')
 
